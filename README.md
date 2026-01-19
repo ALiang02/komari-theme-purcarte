@@ -84,7 +84,7 @@
 
 - **桌面端背景图片链接** (`backgroundImage`)
   - **类型:** `string`
-  - **默认值:** `/assets/Moonlit-Scenery.webp`
+  - **默认值:** `/assets/bg.webp`
   - **说明:** 目前支持单张背景图片或图片api，使用“|”分隔亮色模式和暗色模式，填写单个则同时用于亮暗模式，请自行测试（eg: `https://test.com/1.png`）
 
 - **移动端背景图片链接** (`backgroundImageMobile`)

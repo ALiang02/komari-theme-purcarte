@@ -51,7 +51,7 @@ export interface ConfigOptions {
 export const DEFAULT_CONFIG: ConfigOptions = {
   isShowConfigEditButtonInLogined: true,
   mainWidth: 85,
-  backgroundImage: "/assets/Moonlit-Scenery.webp",
+  backgroundImage: "/assets/bg.webp",
   backgroundImageMobile: "",
   enableVideoBackground: false,
   videoBackgroundUrl: "/assets/LanternRivers_1080p15fps2Mbps3s.mp4",

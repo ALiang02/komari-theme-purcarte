@@ -77,6 +77,11 @@ const AppRoutes = ({
         {...statsBarProps}
       />
       <div className="relative flex-1 min-h-0 flex justify-center overflow-auto">
+        <img
+          src="/assets/hello.png"
+          alt="看板娘"
+          className="fixed top-0 bottom-0 my-auto h-auto right-[-2vw] w-[20vw] hello"
+        />
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route
@@ -84,7 +89,7 @@ const AppRoutes = ({
               element={
                 <div className="flex flex-col w-max">
                   <main
-                    className="w-(--main-width) max-w-[1200px] h-full flex-grow"
+                    className="w-(--main-width) max-w-[75vw] h-full flex-grow"
                     style={{
                       paddingTop:
                         selectedHeaderStyle === "levitation" ? headerHeight : 0,
@@ -114,7 +119,7 @@ const AppRoutes = ({
               element={
                 <div className="flex flex-col">
                   <main
-                    className="w-(--main-width) max-w-[1200px] h-full mx-auto flex-1"
+                    className="w-(--main-width) max-w-[75vw] h-full mx-auto flex-1"
                     style={{
                       paddingTop:
                         selectedHeaderStyle === "levitation" ? headerHeight : 0,
@@ -134,7 +139,7 @@ const AppRoutes = ({
               path="*"
               element={
                 <div className="flex flex-col">
-                  <main className="w-(--main-width) max-w-[1200px] h-full mx-auto flex-1 ">
+                  <main className="w-(--main-width) max-w-[75vw] h-full mx-auto flex-1 ">
                     <NotFoundPage />
                   </main>
                   {selectedFooterStyle === "followContent" && (
@@ -145,11 +150,6 @@ const AppRoutes = ({
             />
           </Routes>
         </Suspense>
-        <img
-          src="/assets/hello.png"
-          alt="看板娘"
-          className="fixed z-999 top-0 bottom-0 my-auto h-auto right-0 w-[20vw] hello"
-        />
       </div>
     </>
   );
@@ -200,12 +200,12 @@ export const AppContent = () => {
     if (isSettingsOpen && !isMobile) {
       document.documentElement.style.setProperty(
         "--main-width",
-        `calc(${mainWidth}vw - var(--setting-width))`
+        `calc(${mainWidth}vw - var(--setting-width))`,
       );
     } else {
       document.documentElement.style.setProperty(
         "--main-width",
-        `${mainWidth}vw`
+        `${mainWidth}vw`,
       );
     }
   }, [isSettingsOpen, isMobile, mainWidth]);
@@ -235,7 +235,7 @@ export const AppContent = () => {
                 />
                 <Suspense fallback={<Loading />}>
                   <div className="flex flex-col">
-                    <main className="w-(--main-width) max-w-[1200px] h-full mx-auto flex-1">
+                    <main className="w-(--main-width) max-w-[75vw] h-full mx-auto flex-1">
                       <PrivatePage />
                     </main>
                     {selectedFooterStyle === "followContent" && (
@@ -307,5 +307,5 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </Router>
     </ConfigProvider>
-  </StrictMode>
+  </StrictMode>,
 );

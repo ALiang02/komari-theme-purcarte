@@ -226,7 +226,8 @@
 /* 悬停特效：鼠标移上去稍微放大或变亮 */
 .hello:hover {
     transform: scale(1.1);
-    filter: brightness(1.1);
+    filter: brightness(1.05);
+    z-index: 999;
 }
 
 /* 移动端适配：屏幕太小时隐藏，避免遮挡文字 */

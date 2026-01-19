@@ -70,7 +70,7 @@ export const DEFAULT_CONFIG: ConfigOptions = {
     "currentTime:true,currentOnline:true,regionOverview:true,trafficOverview:true,networkSpeed:true",
   selectedHeaderStyle: "fixed",
   enableLogo: false,
-  logoUrl: "/assets/logo.png",
+  logoUrl: "/assets/logo.webp",
   enableTitle: true,
   titleText: "Komari",
   enableSearchButton: true,

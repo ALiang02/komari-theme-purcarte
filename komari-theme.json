@@ -174,8 +174,8 @@
                 "name": "Logo 图片链接",
                 "type": "string",
                 "required": false,
-                "default": "/assets/logo.png",
-                "help": "Logo 图片链接（eg: https://test.com/logo.png）"
+                "default": "/assets/logo.webp",
+                "help": "Logo 图片链接（eg: https://test.com/logo.webp）"
             },
             {
                 "key": "enableTitle",

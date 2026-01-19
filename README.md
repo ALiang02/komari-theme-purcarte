@@ -182,8 +182,8 @@
 
 - **Logo 图片链接** (`logoUrl`)
   - **类型:** `string`
-  - **默认值:** `/assets/logo.png`
-  - **说明:** Logo 图片链接（eg: `https://test.com/logo.png`）
+  - **默认值:** `/assets/logo.webp`
+  - **说明:** Logo 图片链接（eg: `https://test.com/logo.webp`）
 
 - **启用标题栏标题** (`enableTitle`)
   - **类型:** `switch`

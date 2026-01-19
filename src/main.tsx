@@ -76,80 +76,90 @@ const AppRoutes = ({
         isSettingsOpen={isSettingsOpen}
         {...statsBarProps}
       />
-      <div className="relative flex-1 min-h-0 flex justify-center overflow-auto">
+      <div className="relative flex-1 min-h-0 flex justify-center overflow-auto custom-scroll">
         <img
           src="/assets/hello.png"
           alt="看板娘"
-          className="fixed top-0 bottom-0 my-auto h-auto right-[-2vw] w-[20vw] hello"
+          className="fixed top-0 bottom-0 my-auto h-auto right-0 w-[15vw] hello"
         />
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="flex flex-col w-max">
-                  <main
-                    className="w-(--main-width) max-w-[75vw] h-full flex-grow"
-                    style={{
-                      paddingTop:
-                        selectedHeaderStyle === "levitation" ? headerHeight : 0,
-                      paddingBottom:
-                        selectedFooterStyle === "levitation" ? footerHeight : 0,
-                    }}
-                  >
-                    <HomePage
-                      searchTerm={searchTerm}
-                      setSearchTerm={setSearchTerm}
-                      filteredNodes={filteredNodes}
-                      selectedGroup={selectedGroup}
-                      setSelectedGroup={setSelectedGroup}
-                      stats={stats}
-                      groups={groups}
-                      handleSort={handleSort}
-                    />
-                  </main>
-                  {selectedFooterStyle === "followContent" && (
-                    <Footer isSettingsOpen={isSettingsOpen} ref={null} />
-                  )}
-                </div>
-              }
-            />
-            <Route
-              path="/instance/:uuid"
-              element={
-                <div className="flex flex-col">
-                  <main
-                    className="w-(--main-width) max-w-[75vw] h-full mx-auto flex-1"
-                    style={{
-                      paddingTop:
-                        selectedHeaderStyle === "levitation" ? headerHeight : 0,
-                      paddingBottom:
-                        selectedFooterStyle === "levitation" ? footerHeight : 0,
-                    }}
-                  >
-                    <InstancePage />
-                  </main>
-                  {selectedFooterStyle === "followContent" && (
-                    <Footer isSettingsOpen={isSettingsOpen} ref={null} />
-                  )}
-                </div>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <div className="flex flex-col">
-                  <main className="w-(--main-width) max-w-[75vw] h-full mx-auto flex-1 ">
-                    <NotFoundPage />
-                  </main>
-                  {selectedFooterStyle === "followContent" && (
-                    <Footer isSettingsOpen={isSettingsOpen} ref={null} />
-                  )}
-                </div>
-              }
-            />
-          </Routes>
-        </Suspense>
+        <div className="bg-[rgba(0,0,0,0.01)] z-2 pl-[2vw] pr-[2vw]">
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <div className="flex flex-col w-max">
+                    <main
+                      className="w-(--main-width) max-w-[75vw] min-w-[320px!important] h-full flex-grow"
+                      style={{
+                        paddingTop:
+                          selectedHeaderStyle === "levitation"
+                            ? headerHeight
+                            : 0,
+                        paddingBottom:
+                          selectedFooterStyle === "levitation"
+                            ? footerHeight
+                            : 0,
+                      }}
+                    >
+                      <HomePage
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        filteredNodes={filteredNodes}
+                        selectedGroup={selectedGroup}
+                        setSelectedGroup={setSelectedGroup}
+                        stats={stats}
+                        groups={groups}
+                        handleSort={handleSort}
+                      />
+                    </main>
+                    {selectedFooterStyle === "followContent" && (
+                      <Footer isSettingsOpen={isSettingsOpen} ref={null} />
+                    )}
+                  </div>
+                }
+              />
+              <Route
+                path="/instance/:uuid"
+                element={
+                  <div className="flex flex-col">
+                    <main
+                      className="w-(--main-width) max-w-[75vw] min-w-[320px!important] h-full mx-auto flex-1"
+                      style={{
+                        paddingTop:
+                          selectedHeaderStyle === "levitation"
+                            ? headerHeight
+                            : 0,
+                        paddingBottom:
+                          selectedFooterStyle === "levitation"
+                            ? footerHeight
+                            : 0,
+                      }}
+                    >
+                      <InstancePage />
+                    </main>
+                    {selectedFooterStyle === "followContent" && (
+                      <Footer isSettingsOpen={isSettingsOpen} ref={null} />
+                    )}
+                  </div>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <div className="flex flex-col">
+                    <main className="w-(--main-width) max-w-[75vw] min-w-[320px!important] h-full mx-auto flex-1 ">
+                      <NotFoundPage />
+                    </main>
+                    {selectedFooterStyle === "followContent" && (
+                      <Footer isSettingsOpen={isSettingsOpen} ref={null} />
+                    )}
+                  </div>
+                }
+              />
+            </Routes>
+          </Suspense>
+        </div>
       </div>
     </>
   );
@@ -235,7 +245,7 @@ export const AppContent = () => {
                 />
                 <Suspense fallback={<Loading />}>
                   <div className="flex flex-col">
-                    <main className="w-(--main-width) max-w-[75vw] h-full mx-auto flex-1">
+                    <main className="w-(--main-width) max-w-[75vw] min-w-[320px!important] h-full mx-auto flex-1">
                       <PrivatePage />
                     </main>
                     {selectedFooterStyle === "followContent" && (

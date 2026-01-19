@@ -236,3 +236,27 @@
         display: none;
     }
 }
+
+.custom-scroll {
+  /* 轨道 */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(167, 228, 181, 0.1); /* 极浅的薄荷绿底色 */
+    border-radius: 10px;
+  }
+
+  /* 滑块 */
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #A7E4B5 0%, #76C893 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(167, 228, 181, 0.5); /* 淡淡的发光效果 */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #76C893;
+    box-shadow: 0 0 8px rgba(118, 200, 147, 0.8);
+  }
+}

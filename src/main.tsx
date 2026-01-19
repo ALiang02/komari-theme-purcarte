@@ -76,7 +76,7 @@ const AppRoutes = ({
         isSettingsOpen={isSettingsOpen}
         {...statsBarProps}
       />
-      <div className="flex-1 min-h-0 flex justify-center overflow-auto">
+      <div className="relative flex-1 min-h-0 flex justify-center overflow-auto">
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route
@@ -84,7 +84,7 @@ const AppRoutes = ({
               element={
                 <div className="flex flex-col w-max">
                   <main
-                    className="w-(--main-width) max-w-screen-2xl h-full flex-grow"
+                    className="w-(--main-width) max-w-[1200px] h-full flex-grow"
                     style={{
                       paddingTop:
                         selectedHeaderStyle === "levitation" ? headerHeight : 0,
@@ -114,7 +114,7 @@ const AppRoutes = ({
               element={
                 <div className="flex flex-col">
                   <main
-                    className="w-(--main-width) max-w-screen-2xl h-full mx-auto flex-1"
+                    className="w-(--main-width) max-w-[1200px] h-full mx-auto flex-1"
                     style={{
                       paddingTop:
                         selectedHeaderStyle === "levitation" ? headerHeight : 0,
@@ -134,7 +134,7 @@ const AppRoutes = ({
               path="*"
               element={
                 <div className="flex flex-col">
-                  <main className="w-(--main-width) max-w-screen-2xl h-full mx-auto flex-1">
+                  <main className="w-(--main-width) max-w-[1200px] h-full mx-auto flex-1 ">
                     <NotFoundPage />
                   </main>
                   {selectedFooterStyle === "followContent" && (
@@ -145,6 +145,11 @@ const AppRoutes = ({
             />
           </Routes>
         </Suspense>
+        <img
+          src="/assets/hello.png"
+          alt="看板娘"
+          className="fixed z-999 top-0 bottom-0 my-auto h-auto right-0 w-[20vw] hello"
+        />
       </div>
     </>
   );
@@ -230,7 +235,7 @@ export const AppContent = () => {
                 />
                 <Suspense fallback={<Loading />}>
                   <div className="flex flex-col">
-                    <main className="w-(--main-width) max-w-screen-2xl h-full mx-auto flex-1">
+                    <main className="w-(--main-width) max-w-[1200px] h-full mx-auto flex-1">
                       <PrivatePage />
                     </main>
                     {selectedFooterStyle === "followContent" && (

@@ -217,3 +217,21 @@
     transform: scale(0.95);
   }
 }
+
+.hello{
+  cursor: pointer;
+  pointer-events: auto; /* 让图片本身可以被点击 */
+  transition: all 0.3s ease; /* 增加平滑动画效果 */
+}
+/* 悬停特效：鼠标移上去稍微放大或变亮 */
+.hello:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+/* 移动端适配：屏幕太小时隐藏，避免遮挡文字 */
+@media (max-width: 768px) {
+    .hello {
+        display: none;
+    }
+}

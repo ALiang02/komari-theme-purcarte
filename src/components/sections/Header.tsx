@@ -69,10 +69,6 @@ const ViewMenuItems = ({
         <Rows3 className="size-4 mr-2 text-primary" />
         <span>{t("header.compact")}</span>
       </DropdownMenuItem>
-      <DropdownMenuItem onClick={() => setViewMode("table")}>
-        <Table2 className="size-4 mr-2 text-primary" />
-        <span>{t("header.table")}</span>
-      </DropdownMenuItem>
     </>
   );
 };
@@ -129,7 +125,8 @@ const ViewModeSwitcher = ({ isMobile }: { isMobile?: boolean }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="purcarte-blur mt-[.5rem] border-(--accent-4)/50 rounded-xl">
+        className="purcarte-blur mt-[.5rem] border-(--accent-4)/50 rounded-xl"
+      >
         <ViewMenuItems setViewMode={setViewMode} />
       </DropdownMenuContent>
     </DropdownMenu>
@@ -164,7 +161,8 @@ const ThemeSwitcher = ({ isMobile }: { isMobile?: boolean }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="purcarte-blur mt-[.5rem] border-(--accent-4)/50 rounded-xl">
+        className="purcarte-blur mt-[.5rem] border-(--accent-4)/50 rounded-xl"
+      >
         <ThemeMenuItems setAppearance={setAppearance} />
       </DropdownMenuContent>
     </DropdownMenu>
@@ -184,7 +182,8 @@ const AdminButton = ({ isMobile }: { isMobile?: boolean }) => {
           href="/admin"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center">
+          className="flex items-center"
+        >
           <CircleUserIcon className="size-4 mr-2 text-primary" />
           <span>{t("header.admin")}</span>
         </a>
@@ -231,7 +230,8 @@ const SearchBar = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="end"
-          className="purcarte-blur border-(--accent-4)/50 rounded-xl w-[90vw] translate-x-[5vw] mt-[.5rem] max-w-screen-2xl">
+          className="purcarte-blur border-(--accent-4)/50 rounded-xl w-[90vw] translate-x-[5vw] mt-[.5rem] max-w-screen-2xl"
+        >
           <div className="p-2">
             <Input
               type="search"
@@ -253,7 +253,8 @@ const SearchBar = ({
       <div
         className={`flex items-center transition-all duration-300 ease-in-out overflow-hidden transform ${
           isSearchOpen ? "w-48 opacity-100" : "w-0 opacity-0"
-        }`}>
+        }`}
+      >
         <Input
           type="search"
           placeholder={t("search.placeholder")}
@@ -270,7 +271,8 @@ const SearchBar = ({
         variant="ghost"
         size="icon"
         className="relative group"
-        onClick={() => setIsSearchOpen(!isSearchOpen)}>
+        onClick={() => setIsSearchOpen(!isSearchOpen)}
+      >
         <Search className="size-5 text-primary" />
         {searchTerm && (
           <span className="absolute top-0 right-0 w-1.5 h-1.5 rounded-full bg-(--accent-indicator) transform -translate-x-1/2"></span>
@@ -317,7 +319,8 @@ export const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
       )}
       style={{
         right: isSettingsOpen && !isMobile ? "var(--setting-width)" : "0",
-      }}>
+      }}
+    >
       <Card className="rounded-none w-full flex items-center justify-center">
         <div className="w-(--main-width) max-w-screen-2xl py-2 flex items-center justify-between">
           <div className="flex items-center theme-text-shadow text-accent-foreground">
@@ -353,14 +356,16 @@ export const Header = forwardRef<HTMLElement, HeaderProps>((props, ref) => {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="relative group">
+                      className="relative group"
+                    >
                       <Menu className="size-5 text-primary transition-transform duration-300 group-data-[state=open]:rotate-180" />
                       <span className="absolute top-0 right-0 w-1.5 h-1.5 rounded-full bg-(--accent-indicator) transform -translate-x-1/2 scale-0 transition-transform duration-300 group-data-[state=open]:scale-100"></span>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
                     align="end"
-                    className="purcarte-blur mt-[.5rem] border-(--accent-4)/50 rounded-xl">
+                    className="purcarte-blur mt-[.5rem] border-(--accent-4)/50 rounded-xl"
+                  >
                     {!isInstancePage && <ViewModeSwitcher isMobile />}
                     <ThemeSwitcher isMobile />
                     <AdminButton isMobile />

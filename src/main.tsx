@@ -1,15 +1,9 @@
 import { StrictMode, useEffect, useRef, useState, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Header } from "@/components/sections/Header";
 import { ConfigProvider, useAppConfig } from "@/config";
 import { DynamicContent } from "@/components/DynamicContent";
@@ -30,10 +24,6 @@ const InstancePage = lazy(() => import("@/pages/instance"));
 const NotFoundPage = lazy(() => import("@/pages/NotFound"));
 const PrivatePage = lazy(() => import("@/pages/Private"));
 
-const homeScrollState = {
-  position: 0,
-};
-
 const AppRoutes = ({
   searchTerm,
   setSearchTerm,
@@ -51,7 +41,6 @@ const AppRoutes = ({
   headerHeight: number;
   footerHeight: number;
 }) => {
-  const location = useLocation();
   const {
     loading,
     groups,
@@ -77,34 +66,6 @@ const AppRoutes = ({
     onSort: handleSort,
   };
 
-  const homeViewportRef = useRef<HTMLDivElement | null>(null);
-  const instanceViewportRef = useRef<HTMLDivElement | null>(null);
-
-  const handleHomeScroll = () => {
-    if (location.pathname === "/" && homeViewportRef.current) {
-      homeScrollState.position = homeViewportRef.current.scrollTop;
-    }
-  };
-
-  useEffect(() => {
-    if (location.pathname === "/") {
-      const timer = setTimeout(() => {
-        if (homeViewportRef.current) {
-          homeViewportRef.current.scrollTop = homeScrollState.position;
-        }
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (!location.pathname.startsWith("/instance")) return;
-    const frame = requestAnimationFrame(() => {
-      instanceViewportRef.current?.scrollTo({ top: 0 });
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [location.pathname]);
-
   return (
     <>
       <Header
@@ -115,79 +76,64 @@ const AppRoutes = ({
         isSettingsOpen={isSettingsOpen}
         {...statsBarProps}
       />
-      <div className="flex-1 min-h-0">
+      <div className="flex-1 min-h-0 flex justify-center overflow-auto">
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route
               path="/"
               element={
-                <ScrollArea
-                  className="h-full"
-                  viewportRef={homeViewportRef}
-                  viewportProps={{ onScroll: handleHomeScroll }}>
-                  <div className="flex flex-col min-h-screen">
-                    <main
-                      className="w-(--main-width) max-w-screen-2xl mx-auto h-full flex-grow"
-                      style={{
-                        paddingTop:
-                          selectedHeaderStyle === "levitation"
-                            ? headerHeight
-                            : 0,
-                        paddingBottom:
-                          selectedFooterStyle === "levitation"
-                            ? footerHeight
-                            : 0,
-                      }}>
-                      <HomePage
-                        searchTerm={searchTerm}
-                        setSearchTerm={setSearchTerm}
-                        filteredNodes={filteredNodes}
-                        selectedGroup={selectedGroup}
-                        setSelectedGroup={setSelectedGroup}
-                        stats={stats}
-                        groups={groups}
-                        handleSort={handleSort}
-                      />
-                    </main>
-                    {selectedFooterStyle === "followContent" && (
-                      <Footer isSettingsOpen={isSettingsOpen} ref={null} />
-                    )}
-                  </div>
-                </ScrollArea>
+                <div className="flex flex-col w-max">
+                  <main
+                    className="w-(--main-width) max-w-screen-2xl h-full flex-grow"
+                    style={{
+                      paddingTop:
+                        selectedHeaderStyle === "levitation" ? headerHeight : 0,
+                      paddingBottom:
+                        selectedFooterStyle === "levitation" ? footerHeight : 0,
+                    }}
+                  >
+                    <HomePage
+                      searchTerm={searchTerm}
+                      setSearchTerm={setSearchTerm}
+                      filteredNodes={filteredNodes}
+                      selectedGroup={selectedGroup}
+                      setSelectedGroup={setSelectedGroup}
+                      stats={stats}
+                      groups={groups}
+                      handleSort={handleSort}
+                    />
+                  </main>
+                  {selectedFooterStyle === "followContent" && (
+                    <Footer isSettingsOpen={isSettingsOpen} ref={null} />
+                  )}
+                </div>
               }
             />
             <Route
               path="/instance/:uuid"
               element={
-                <ScrollArea
-                  className="h-full"
-                  viewportRef={instanceViewportRef}>
-                  <div className="flex flex-col min-h-screen">
-                    <main
-                      className="w-(--main-width) max-w-screen-2xl h-full mx-auto flex-1"
-                      style={{
-                        paddingTop:
-                          selectedHeaderStyle === "levitation"
-                            ? headerHeight
-                            : 0,
-                        paddingBottom:
-                          selectedFooterStyle === "levitation"
-                            ? footerHeight
-                            : 0,
-                      }}>
-                      <InstancePage />
-                    </main>
-                    {selectedFooterStyle === "followContent" && (
-                      <Footer isSettingsOpen={isSettingsOpen} ref={null} />
-                    )}
-                  </div>
-                </ScrollArea>
+                <div className="flex flex-col">
+                  <main
+                    className="w-(--main-width) max-w-screen-2xl h-full mx-auto flex-1"
+                    style={{
+                      paddingTop:
+                        selectedHeaderStyle === "levitation" ? headerHeight : 0,
+                      paddingBottom:
+                        selectedFooterStyle === "levitation" ? footerHeight : 0,
+                    }}
+                  >
+                    <InstancePage />
+                  </main>
+                  {selectedFooterStyle === "followContent" && (
+                    <Footer isSettingsOpen={isSettingsOpen} ref={null} />
+                  )}
+                </div>
               }
             />
             <Route
               path="*"
               element={
-                <div className="flex flex-col min-h-screen">
+                <div className="flex flex-col">
                   <main className="w-(--main-width) max-w-screen-2xl h-full mx-auto flex-1">
                     <NotFoundPage />
                   </main>
@@ -264,7 +210,8 @@ export const AppContent = () => {
       appearance={appearance}
       accentColor={color}
       scaling="110%"
-      style={{ backgroundColor: "transparent" }}>
+      style={{ backgroundColor: "transparent" }}
+    >
       <Toaster />
       <DynamicContent>
         <div
@@ -272,7 +219,8 @@ export const AppContent = () => {
             isSettingsOpen && !isMobile
               ? "grid-cols-[1fr_auto]"
               : "grid-cols-[1fr]"
-          } overflow-hidden`}>
+          } overflow-hidden`}
+        >
           <div className="flex flex-col text-sm flex-1 overflow-hidden">
             {siteStatus === "private-unauthenticated" ? (
               <>
@@ -281,7 +229,7 @@ export const AppContent = () => {
                   setIsSettingsOpen={setIsSettingsOpen}
                 />
                 <Suspense fallback={<Loading />}>
-                  <div className="flex flex-col min-h-screen">
+                  <div className="flex flex-col">
                     <main className="w-(--main-width) max-w-screen-2xl h-full mx-auto flex-1">
                       <PrivatePage />
                     </main>

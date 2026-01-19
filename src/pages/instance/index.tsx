@@ -25,7 +25,7 @@ const InstancePage = () => {
   const [isReady, setIsReady] = useState(false);
   const [chartType, setChartType] = useState<"load" | "ping">("load");
   const [displayedChartType, setDisplayedChartType] = useState<"load" | "ping">(
-    "load"
+    "load",
   );
   const [chartAnimationState, setChartAnimationState] = useState<
     "idle" | "fading-out" | "fading-in"
@@ -54,7 +54,7 @@ const InstancePage = () => {
 
   const pingTimeRanges = useMemo(() => {
     const filtered = timeRanges.filter(
-      (range) => range.hours !== 0 && range.hours <= maxPingRecordPreserveTime
+      (range) => range.hours !== 0 && range.hours <= maxPingRecordPreserveTime,
     );
 
     if (maxPingRecordPreserveTime > 720) {
@@ -75,7 +75,7 @@ const InstancePage = () => {
 
   const loadTimeRanges = useMemo(() => {
     const filtered = timeRanges.filter(
-      (range) => range.hours <= maxRecordPreserveTime
+      (range) => range.hours <= maxRecordPreserveTime,
     );
     if (maxRecordPreserveTime > 720) {
       const dynamicLabel =
@@ -180,14 +180,15 @@ const InstancePage = () => {
   }
 
   return (
-    <div className="text-card-foreground space-y-4 my-4 fade-in @container">
+    <div className="text-card-foreground space-y-4 py-4 fade-in @container">
       <Card className="flex items-center justify-between p-4 mb-4 text-primary">
         <div className="flex items-center gap-2 min-w-0">
           <Button
             className="flex-shrink-0"
             variant="outline"
             size="icon"
-            onClick={() => navigate(-1)}>
+            onClick={() => navigate(-1)}
+          >
             <ArrowLeft />
           </Button>
           <div className="flex items-center gap-2 min-w-0">
@@ -208,14 +209,16 @@ const InstancePage = () => {
             <Button
               variant={chartType === "load" ? "default" : "ghost"}
               size="sm"
-              onClick={() => handleChartTypeChange("load")}>
+              onClick={() => handleChartTypeChange("load")}
+            >
               {t("instancePage.optionLoad")}
             </Button>
             {enablePingChart && (
               <Button
                 variant={chartType === "ping" ? "default" : "ghost"}
                 size="sm"
-                onClick={() => handleChartTypeChange("ping")}>
+                onClick={() => handleChartTypeChange("ping")}
+              >
                 {t("instancePage.optionPing")}
               </Button>
             )}
@@ -229,7 +232,8 @@ const InstancePage = () => {
                   key={range.label}
                   variant={loadHours === range.hours ? "default" : "ghost"}
                   size="sm"
-                  onClick={() => setLoadHours(range.hours)}>
+                  onClick={() => setLoadHours(range.hours)}
+                >
                   {range.label}
                 </Button>
               ))}
@@ -241,7 +245,8 @@ const InstancePage = () => {
                   key={range.label}
                   variant={pingHours === range.hours ? "default" : "ghost"}
                   size="sm"
-                  onClick={() => setPingHours(range.hours)}>
+                  onClick={() => setPingHours(range.hours)}
+                >
                   {range.label}
                 </Button>
               ))}
@@ -255,15 +260,17 @@ const InstancePage = () => {
           chartAnimationState === "fading-out"
             ? "fade-out"
             : chartAnimationState === "fading-in"
-            ? "fade-in"
-            : undefined
-        }>
+              ? "fade-in"
+              : undefined
+        }
+      >
         <Suspense
           fallback={
             <div className="flex items-center justify-center h-96">
               <Loading text={t("chart.loading")} />
             </div>
-          }>
+          }
+        >
           {displayedChartType === "load" && staticNode ? (
             <LoadCharts
               node={staticNode}

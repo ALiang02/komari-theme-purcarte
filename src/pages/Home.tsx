@@ -89,7 +89,7 @@ const HomePage: React.FC<HomePageProps> = ({
   };
 
   return (
-    <div className="fade-in my-4">
+    <div className="fade-in py-4">
       {enableStatsBar && (!isShowStatsInHeader || isMobile) && (
         <StatsBar
           displayOptions={statusCardsVisibility}
@@ -113,7 +113,8 @@ const HomePage: React.FC<HomePageProps> = ({
               key={group}
               variant={selectedGroup === group ? "secondary" : "ghost"}
               size="sm"
-              onClick={() => setSelectedGroup?.(group)}>
+              onClick={() => setSelectedGroup?.(group)}
+            >
               {group}
             </Button>
           ))}
@@ -131,15 +132,15 @@ const HomePage: React.FC<HomePageProps> = ({
                   {hasSearchTerm
                     ? t("search.notFound")
                     : error
-                    ? t("homePage.errorFetchingNodes")
-                    : t("homePage.noNodes")}
+                      ? t("homePage.errorFetchingNodes")
+                      : t("homePage.noNodes")}
                 </CardTitle>
                 <CardDescription>
                   {hasSearchTerm
                     ? t("search.tryChangingFilters")
                     : error
-                    ? t("homePage.retryFetchingNodes")
-                    : t("homePage.addNodesInAdmin")}
+                      ? t("homePage.retryFetchingNodes")
+                      : t("homePage.addNodesInAdmin")}
                 </CardDescription>
               </CardHeader>
               <CardFooter>
@@ -150,7 +151,8 @@ const HomePage: React.FC<HomePageProps> = ({
                 ) : error ? (
                   <Button
                     onClick={() => void refreshNodes()}
-                    className="w-full">
+                    className="w-full"
+                  >
                     {t("search.retry")}
                   </Button>
                 ) : (
@@ -158,7 +160,8 @@ const HomePage: React.FC<HomePageProps> = ({
                     onClick={() =>
                       window.open("/admin", "_blank", "noopener,noreferrer")
                     }
-                    className="w-full">
+                    className="w-full"
+                  >
                     {t("homePage.addNode")}
                   </Button>
                 )}
